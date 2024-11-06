@@ -1,13 +1,12 @@
 import { Module } from '@nestjs/common';
 import { UserModule } from './user/user.module';
-import { ExerciseModule } from './exercise/exercise.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from './user/user.entity';
+import { User } from './user/entities/user.entity';
+import { Exercise } from './user/entities/exercise.entity';
 
 @Module({
     imports: [
         UserModule,
-        ExerciseModule,
         TypeOrmModule.forRoot({
             type: 'postgres',
             host: 'localhost',
@@ -15,7 +14,7 @@ import { User } from './user/user.entity';
             username: 'postgres',
             password: 'postgres',
             database: 'exercise-tracker',
-            entities: [User],
+            entities: [User, Exercise],
             synchronize: true,
         }),
     ],

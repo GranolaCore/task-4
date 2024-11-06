@@ -3,6 +3,7 @@ import { UserService } from './user.service';
 import { UserController } from './user.controller';
 import { UserRepository } from 'src/repositories/user.repository';
 import { DataSource } from 'typeorm';
+import { ExerciseRepository } from 'src/repositories/exercise.repository';
 
 @Module({
     providers: [
@@ -11,6 +12,13 @@ import { DataSource } from 'typeorm';
             provide: UserRepository,
             useFactory: (dataSource: DataSource) => {
                 return new UserRepository(dataSource);
+            },
+            inject: [DataSource],
+        },
+        {
+            provide: ExerciseRepository,
+            useFactory: (dataSource: DataSource) => {
+                return new ExerciseRepository(dataSource);
             },
             inject: [DataSource],
         },
